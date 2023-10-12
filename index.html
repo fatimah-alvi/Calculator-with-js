@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    body {
+        background-color: whitesmoke;
+        display: flex;
+        justify-content: center;
+    }
+
+    #calculator {
+        position: relative;
+        min-width: 300px;
+        max-width: 425px;
+        top: 12.5vh;
+        height: 75vh;
+        border-radius: 20px;
+        width: 25vw;
+        box-shadow: rgba(20, 20, 21, 0.6) 0px 12px 29px 0px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+
+    #input {
+        height: 10%;
+        width: 87%;
+        background-color: whitesmoke;
+        border: none;
+        font-size: 25px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        padding-left: 10px;
+        box-sizing: border-box;
+        box-shadow: rgb(112, 110, 110) 0px 20px 30px -20px;
+    }
+
+    input:focus {
+        background-color: white;
+    }
+
+    #mainChild {
+        height: 80%;
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+
+    button {
+        height: 100%;
+        width: 20%;
+        font-size: 30px;
+        font-weight: bold;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        border-radius: 50%;
+        box-shadow: rgb(112, 110, 110) 0px 20px 30px -10px;
+    }
+
+    .line01 {
+        position: relative;
+        text-align: center;
+        height: 12%;
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+</style>
+
+<body>
+    <div id="calculator">
+        <input type="text" name="" id="input" placeholder="ENTER">
+        <div id="mainChild">
+            <div class="line1 line01">
+                <button>C</button>
+                <button>/</button>
+                <button>*</button>
+                <button>x</button>
+            </div>
+            <div class="line2 line01">
+                <button>7</button>
+                <button>8</button>
+                <button>9</button>
+                <button>-</button>
+            </div>
+            <div class="line3 line01">
+                <button>4</button>
+                <button>5</button>
+                <button>6</button>
+                <button>%</button>
+            </div>
+            <div class="line4 line01">
+                <button>1</button>
+                <button>2</button>
+                <button>3</button>
+                <button>+</button>
+            </div>
+            <div class="line5 line01">
+                <button>00</button>
+                <button>0</button>
+                <button>.</button>
+                <button>=</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+
+    // step01 select required elements
+    let myinp = document.querySelector("input")
+    let btns = document.querySelectorAll("button")
+
+
+    // STEP03 HANDLER FUNCTION 
+    let handleClick = (e) => {
+        let select = e.target.innerText
+        console.log(select);
+        if (select == "=") {
+
+            if(select.includes("%")){
+                let result=select.split("%")
+            myinp.value=result[1]/100*result[0]
+            }
+            else{
+                myinp.value = eval(myinp.value)
+            }
+            
+
+            // var val=myinp.value
+            // var result=eval(val)
+            // console.log(val,result,"test");
+            // myinp.value=result
+        }
+        else if (select === 'C') {
+            myinp.value = ''
+        }
+        else if (select === 'x') {
+            myinp.value = myinp.value.slice(0, -1)
+        }
+        else {
+            myinp.value += select
+        }
+    }
+
+    // step02ADDED LISTNER 
+    btns.forEach((btn) => {
+        btn.addEventListener("click", handleClick)
+    })
+
+
+
+</script>
+
+</html>
